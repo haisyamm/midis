@@ -14,31 +14,22 @@
 ***********************************************************************************/
 function getMenu()
 {
+  $db      = \Config\Database::connect();
+  $builder = $db->table('user_menus');
   $GLOBALS['user_group_id'] = 1;
-  $result = $this->table('user_menus')
-              ->select('user_menus.id,user_menus.parent_id,user_menus.name,user_menus.url,user_menus.icon_menu')
-              ->join('user_rules','user_menus.id = user_rules.menu_id ','left')
-              ->where('user_rules.group_id',$GLOBALS['user_group_id'])
-              ->where('user_menus.show_in_menu',1)
-              ->orderBy('user_menus.id','ASC')
-              ->get()
-              ->getResultArray();
-  
-  return $result;
+
+            $result = $builder->select('user_menus.id,user_menus.parent_id,user_menus.name,user_menus.url,user_menus.icon_menu')
+                        ->join('user_rules','user_menus.id = user_rules.menu_id ','left')
+                        ->where('user_rules.group_id',$GLOBALS['user_group_id'])
+                        ->where('user_menus.show_in_menu',1)
+                        ->orderBy('user_menus.id','ASC')
+                        ->get()
+                        ->getResultArray();
+            
+           return sortMenu($result);
+            //return $result;
 }
 
-/***********************************************************************************
- * Description
- * Looping menu if has child
- * 
- * Parameter
- * $raw       => $array data from database result
- * $parent_id => parent_id column
- * 
- * Return
- * array data
- * 
-***********************************************************************************/
 function sortMenu($raw, $parent_id = 0)
 {
   $return = array();
@@ -53,6 +44,34 @@ function sortMenu($raw, $parent_id = 0)
     if($proceed) $return[$key]['child'] = sortMenu($raw, $raw[$key]['id']);
   }
   return $return;
+}
+/***********************************************************************************
+ * Description
+ * Looping menu if has child
+ * 
+ * Parameter
+ * $raw       => $array data from database result
+ * $parent_id => parent_id column
+ * 
+ * Return
+ * array data
+ * 
+***********************************************************************************/
+function template($view_name, $data)
+{
+  echo view('_partials/header');
+  //   <!-- begin::Body -->
+  echo '<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">';
+    // <!-- BEGIN: Left Aside -->
+  echo '<button class="m-aside-left-close  m-aside-left-close--skin-dark " id="m_aside_left_close_btn"><i class="la la-close"></i></button>
+        <div id="m_aside_left" class="m-grid__item  m-aside-left  m-aside-left--skin-dark ">';
+  echo view('_partials/sidebar', $data);
+  echo '</div>';
+    //  <!-- END: Left Aside -->
+  echo view( $view_name, $data);
+  echo "</div>";
+  //    <!-- end:: Body -->
+  echo view('_partials/footer', $data);
 }
 
 /***********************************************************************************

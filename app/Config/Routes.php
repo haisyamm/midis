@@ -31,7 +31,9 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/Setting', 'Setting::index');
+
+$routes->get('/menu_setting', 'Setting::menu_setting');
+$routes->get('/setting/delete_menu', 'Setting::delete_menu');
 $routes->get('/NyobaHelper', 'NyobaHelper::index');
 
 /**

@@ -17,7 +17,7 @@ License: You must have a valid license purchased only from themeforest(the above
   <!-- begin::Head -->
   <head>
     <meta charset="utf-8" />
-    <title>Metronic | Dashboard</title>
+    <title>SIKERJA | Kelas Kerjasama</title>
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
@@ -31,18 +31,21 @@ License: You must have a valid license purchased only from themeforest(the above
             }
           });
         </script>
+      <!-- date range picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     <!--end::Web font -->
+    <link href="<?php echo base_url('assets'); ?>/css/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url('assets'); ?>/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url('assets'); ?>/vendors/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 
-    <!--begin::Global Theme Styles -->
-    <link href="<?php echo base_url('assets'); ?>/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
-
-    <!--RTL version:<link href="assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
-    <link href="<?php echo base_url('assets'); ?>/demo/demo12/base/style.bundle.css" rel="stylesheet" type="text/css" />
-
-    <!--RTL version:<link href="assets/demo/demo12/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
-
-    <!--end::Global Theme Styles -->
+    
 
     <!--begin::Page Vendors Styles -->
     <link href="<?php echo base_url('assets'); ?>/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -71,7 +74,8 @@ License: You must have a valid license purchased only from themeforest(the above
               <div class="m-stack m-stack--ver m-stack--general">
                 <div class="m-stack__item m-stack__item--middle m-brand__logo">
                   <a href="index.html" class="m-brand__logo-wrapper">
-                    <img alt="" src="<?php echo base_url('assets'); ?>/demo/demo12/media/img/logo/logo.png" />
+                    <!--<img alt="" src="<?php echo base_url('assets'); ?>/demo/demo12/media/img/logo/logo.png" />-->
+                    SIKERJA
                   </a>
                 </div>
                 <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -554,3 +558,4 @@ License: You must have a valid license purchased only from themeforest(the above
       </header>
 
       <!-- END: Header -->
+

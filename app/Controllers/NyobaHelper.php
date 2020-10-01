@@ -14,21 +14,9 @@ class NyobaHelper extends BaseController
 
   public function index()
   {
-    //$data['menu']  = array('id' => '21','nama' => 'asd' );
-    //$model = new Setting_model()->getResult();
-        try
-    {
       $result  = $this->setting->getMenu();
       $data['menu'] = sortMenu($result);
-      //$data['menu'] = $this->setting->getMenu();
-    }
-    catch (\Exception $e)
-    {
-        die($e->getMessage());
-    }
-        //$data['category'] = $model->getCategory()->getResult();
-        //echo view('product_view', $data);
-    echo view('admin/home', $data);
-  }
 
+      return template('admin/home', $data);
+  }
 }

@@ -66,7 +66,7 @@
                       $menu_active = "";
                     }?>
                       <li class="<?php echo $child_active; ?>" aria-haspopup="true">
-                        <a href="<?php echo site_url($nav['url'] . '/' . $child['url']);?>" class="m-menu__link">
+                        <a href="<?php echo base_url($child['url']);?>" class="m-menu__link">
                         <i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i>
                         <span class="m-menu__link-text <?php echo $menu_active; ?>"><?php echo $child['name'];?></span></a>
                       </li>

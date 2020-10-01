@@ -43,23 +43,25 @@
 
       <!-- end::Footer -->
     </div>
-
+    <?php if(!empty($js) || $js != ''): echo view('admin/js/' . $js .'.php'); endif;?>
     <!-- end:: Page -->
     <!--begin::Global Theme Bundle -->
     <script src="<?php echo base_url('assets'); ?>/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-    <script src="<?php echo base_url('assets'); ?>/demo/demo12/base/scripts.bundle.js" type="text/javascript"></script>
-
     <!--end::Global Theme Bundle -->
-
     <!--begin::Page Vendors -->
     <script src="<?php echo base_url('assets'); ?>/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
     <script src="<?php echo base_url('assets'); ?>/app/js/dashboard.js" type="text/javascript"></script>
-
     <!--end::Page Scripts -->
+    <script src="<?php echo base_url('assets'); ?>/js/vendors.bundle.js" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets'); ?>/js/scripts.bundle.js" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets'); ?>/js/sweetalert2.js" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets'); ?>/vendors/datatables/datatables.bundle.js" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets'); ?>/js/bootstrap-notify.js" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets'); ?>/js/treeview.js" type="text/javascript"></script>
+    
   </body>
 
   <!-- end::Body -->

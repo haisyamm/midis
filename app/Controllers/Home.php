@@ -16,15 +16,14 @@ class Home extends BaseController
   {
    try
     {
-      $result  = $this->setting->getMenu();
-      $data['menu'] = sortMenu($result);
-   
+        $data['menu'] = getMenu();
+        $data['js'] = '';
     }
    catch (\Exception $e)
     {
         die($e->getMessage());
     }
-    echo view('admin/home', $data);
+    echo template('admin/home', $data);
   }
 
 }

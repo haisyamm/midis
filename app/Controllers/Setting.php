@@ -4,10 +4,7 @@ use App\Models\SettingModel;
 
 
 class Setting extends BaseController
-{
-
-  helper('MyHelper');
-  
+{  
 	public function __construct() {
 
         // Mendeklarasikan class ProductModel menggunakan $this->product
@@ -19,39 +16,43 @@ class Setting extends BaseController
     }
 	public function index()
 	{
-		//$data['menu']  = array('id' => '21','nama' => 'asd' );
-		//$model = new Setting_model()->getResult();
-  //   try
-		// {
-		//   $result  = $this->setting->getMenu();
-		//   $data['menu'] = $this->sortMenu($result);
-		// 	//$data['menu'] = $this->setting->getMenu();
-		// }
-		// catch (\Exception $e)
-		// {
-		//     die($e->getMessage());
-		// }
-  //       //$data['category'] = $model->getCategory()->getResult();
-  //       //echo view('product_view', $data);
-		// echo view('admin/home', $data);
-    chicking_helper();
-	}
+      $data['menu'] = getMenu();
 
-	public function sortMenu($raw, $parent_id = 0)
+      return template('admin/menu_setting', $data);
+	}
+  public function menu_setting()
+  {
+
+      $data['menu'] = getMenu();
+      $data['data'] = "";
+      $data['js'] = "menu_setting";
+      $data['data_menu'] = $this->setting->getMenu();
+      $data['data_submenu'] = $this->setting->getSubMenu();
+
+      return template('admin/menu_setting', $data);
+  }
+
+  public function delete_menu($id)
+  {
+    $data = $this->setting->delete_menu($id);
+
+    if($data)
     {
-      $return = array();
-      foreach($raw as $key => $val)
-      {
-        $proceed = FALSE;
-        if($raw[$key]['parent_id'] == $parent_id)
-        {
-          $return[$key] = $raw[$key];
-          $proceed = TRUE;
-        }
-        if($proceed) $return[$key]['child'] = $this->sortMenu($raw, $raw[$key]['id']);
-      }
-      return $return;
+      $params = [
+        'status'  => '200',
+        'message' => 'Berhasil menghapus data Menu'
+      ];
     }
-	//--------------------------------------------------------------------
+    else
+    {
+      $params = [
+        'status'  => '400',
+        'message' => 'Gagal menghapus data Menu'
+      ];
+    }
+
+    echo json_encode($params);
+  }
+
 
 }

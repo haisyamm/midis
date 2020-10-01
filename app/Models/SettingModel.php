@@ -4,22 +4,50 @@ use CodeIgniter\Model;
 
 class SettingModel extends Model
 {
-    protected $table = "user_menus";
 
     public function getMenu()
     {
-            $GLOBALS['user_group_id'] = 1;
-            $result = $this->table('user_menus')
-                        ->select('user_menus.id,user_menus.parent_id,user_menus.name,user_menus.url,user_menus.icon_menu')
-                        ->join('user_rules','user_menus.id = user_rules.menu_id ','left')
-                        ->where('user_rules.group_id',$GLOBALS['user_group_id'])
-                        ->where('user_menus.show_in_menu',1)
-                        ->orderBy('user_menus.id','ASC')
-                        ->get()
-                        ->getResultArray();
-            
-            //$return = $this->sortMenu($result);
-            return $result;
+            $builder = $this->db->table('user_menus')->where(['parent_id' => '0']);
+            $query   = $builder->get()->getResultArray();
+
+            return $query;
+
     } 
+
+    public function getSubMenu()
+    {
+            $builder = $this->db->table('user_menus')->where(['parent_id !=' => '0']);
+            $query   = $builder->get()->getResultArray();
+
+            return $query;
+
+    } 
+
+    public function delete_menu($id)
+    {
+        $um = $this->db->table('user_menus');
+        $ur = $this->db->table('user_rules');
+        //mengambil data submenu
+        $submenu = $um->where(['parent_id' => $id])->get()->getResultArray();
+            
+        
+        foreach($submenu as $sb)
+        {   
+            //menghapus submenu pada user_rules
+            $ur->where('menu_id', $sb['id'])->delete();
+
+            //menghapus submenu pada user_menus
+            $um->where('id', $sb['id'])->delete();
+        }
+
+        // menghapus menu
+        $where_menu = [
+            'id'    => $id
+        ];
+
+        $um->where($where_menu)->delete();
+
+        return true;
+    }
 
 }
